@@ -1,12 +1,9 @@
 package com.skyline.anyposibility.runner.command;
 
 import com.skyline.anyposibility.runner.Runner;
-import com.skyline.anyposibility.runner.exception.RunApplicationFailed;
 import com.skyline.command.SkyCommand;
 import com.skyline.command.argument.StringCommandArgumentType;
 import com.skyline.command.command.BaseCommand;
-
-import java.io.IOException;
 
 /**
  * [FEATURE INFO]<br/>
@@ -50,12 +47,12 @@ public class RunnerCommand extends BaseCommand {
         SKY_COMMAND.register().execution("R").action("list")
                 .option("all", "a").option("name", "n")
                 .executor(
-                        args -> RUNNER.listName()
+                        args -> RUNNER.listName().forEach(System.out::println)
                 );
         SKY_COMMAND.register().execution("R").action("list")
                 .option("all", "a")
                 .executor(
-                        args -> RUNNER.listDetail()
+                        args -> RUNNER.listDetail().forEach((name, command) -> System.out.println(name + ": " + command))
                 );
     }
 }
