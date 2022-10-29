@@ -1,4 +1,4 @@
-package com.skyline.anyposibility;
+package com.skyline.anyposibility.application;
 
 import com.skyline.anyposibility.config.CommandConfig;
 

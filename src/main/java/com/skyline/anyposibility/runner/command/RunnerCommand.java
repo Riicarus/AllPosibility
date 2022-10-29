@@ -1,7 +1,7 @@
-package com.skyline.anyposibility.run.command;
+package com.skyline.anyposibility.runner.command;
 
-import com.skyline.anyposibility.run.Runner;
-import com.skyline.anyposibility.run.exception.RunApplicationFailed;
+import com.skyline.anyposibility.runner.Runner;
+import com.skyline.anyposibility.runner.exception.RunApplicationFailed;
 import com.skyline.command.SkyCommand;
 import com.skyline.command.argument.StringCommandArgumentType;
 import com.skyline.command.command.BaseCommand;
@@ -27,19 +27,16 @@ public class RunnerCommand extends BaseCommand {
 
     @Override
     public void defineCommand() {
-        SKY_COMMAND.register().execution("runner").action("run")
+        SKY_COMMAND.register().execution("R").action("run")
                 .option("name", "n").argument("name", new StringCommandArgumentType())
                 .executor(
                         args -> {
                             String name = (String) args[0];
-                            try {
-                                RUNNER.run(name);
-                            } catch (IOException | InterruptedException e) {
-                                throw new RunApplicationFailed("程序执行失败.", e.getCause());
-                            }
+
+                            RUNNER.run(name);
                         }
                 );
-        SKY_COMMAND.register().execution("runner").action("add")
+        SKY_COMMAND.register().execution("R").action("add")
                 .option("name", "n").argument("name", new StringCommandArgumentType())
                 .option("command", "c").argument("command", new StringCommandArgumentType())
                 .executor(
@@ -49,6 +46,16 @@ public class RunnerCommand extends BaseCommand {
 
                             RUNNER.add(name, command);
                         }
+                );
+        SKY_COMMAND.register().execution("R").action("list")
+                .option("all", "a").option("name", "n")
+                .executor(
+                        args -> RUNNER.listName()
+                );
+        SKY_COMMAND.register().execution("R").action("list")
+                .option("all", "a")
+                .executor(
+                        args -> RUNNER.listDetail()
                 );
     }
 }

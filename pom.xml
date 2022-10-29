@@ -71,7 +71,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.skyline.anyposibility.Application</mainClass>
+                            <mainClass>com.skyline.anyposibility.application.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

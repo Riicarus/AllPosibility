@@ -1,12 +1,9 @@
-package com.skyline.anyposibility.run.register;
+package com.skyline.anyposibility.runner.register;
 
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 /**
  * [FEATURE INFO]<br/>
@@ -20,13 +17,13 @@ public class RunnerProperties {
 
     private static final String CONFIG_PATH = "runner.properties";
 
-    private final HashMap<String, String> runnerCommandRegister = new HashMap<>();
+    private final HashMap<String, String> registeredApplicationMap = new HashMap<>();
 
     public void load() {
         Properties properties = loadProperties();
 
         Set<String> propertyNames = properties.stringPropertyNames();
-        propertyNames.forEach(name -> runnerCommandRegister.put(name, properties.getProperty(name)));
+        propertyNames.forEach(name -> registeredApplicationMap.put(name, properties.getProperty(name)));
     }
 
     public void register(String name, String property) {
@@ -63,7 +60,7 @@ public class RunnerProperties {
             URL url = RunnerProperties.class.getClassLoader().getResource(CONFIG_PATH);
             File file = new File(Objects.requireNonNull(url).getFile());
             out = new FileOutputStream(file);
-            writer = new OutputStreamWriter(out);
+            writer = new OutputStreamWriter(out, StandardCharsets.UTF_8);
             properties.setProperty(name, property);
             properties.store(writer, "store new property.");
 
@@ -74,11 +71,15 @@ public class RunnerProperties {
         }
     }
 
-    public String getCommand(String name) {
-        return runnerCommandRegister.get(name);
+    public Set<String> listRegisteredName() {
+        return registeredApplicationMap.keySet();
     }
 
-    public HashMap<String, String> getRunnerCommandRegister() {
-        return runnerCommandRegister;
+    public String getCommand(String name) {
+        return registeredApplicationMap.get(name);
+    }
+
+    public HashMap<String, String> getRunnerCommandRegisterMap() {
+        return registeredApplicationMap;
     }
 }

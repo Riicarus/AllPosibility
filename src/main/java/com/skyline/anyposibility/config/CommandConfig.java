@@ -1,7 +1,7 @@
 package com.skyline.anyposibility.config;
 
-import com.skyline.anyposibility.run.Runner;
-import com.skyline.anyposibility.run.command.RunnerCommand;
+import com.skyline.anyposibility.runner.Runner;
+import com.skyline.anyposibility.runner.command.RunnerCommand;
 import com.skyline.command.SkyCommand;
 import com.skyline.command.manage.ConsoleIOHandler;
 import com.skyline.command.manage.IOHandler;
